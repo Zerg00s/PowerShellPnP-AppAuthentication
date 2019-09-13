@@ -1,6 +1,24 @@
+# Goal
+
+Suppose, you are working for the company that enforces MFA policy across all user accounts. This makes it hard to use PowerShell PnP for remote deployments via Azure DevOps or Azure Automation. As an alternative to disabling MFA, we can register an Azure AD app and assign Full control to the SharePoint Tenant. 
+
+
+## What script does
+The script will automatically:
+- Generate self-signed password-protected certificate
+- Generate random secure password
+- Register a new Azure AD app
+- Upload certificate to the registered app
+- Grant Full Control to SharePoint sites
+- Grant Admin's consent
+- Save the results in the same folder
+
+
+
 ## Prerequisites
 - [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest)
 - `Install-Module -Name SharePointPnPPowerShellOnline -RequiredVersion 3.11.1907.0 -Force`
+- The script needs to be run by the Global Office 365/Azure Administrator
 
 ## Let's Register an AD App
 
