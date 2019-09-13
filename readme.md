@@ -2,7 +2,7 @@
 - [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest)
 - `Install-Module -Name SharePointPnPPowerShellOnline -RequiredVersion 3.11.1907.0 -Force`
 
-## Let's Register and AD App
+## Let's Register an AD App
 
 - Right-click on the `Register_AAD_app.bat`
 
