@@ -1,6 +1,9 @@
 ## Prerequisites
 - [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest)
 - `Install-Module -Name SharePointPnPPowerShellOnline -RequiredVersion 3.11.1907.0 -Force`
+
+## Let's Register and AD App
+
 - Right-click on the `Register_AAD_app.bat`
 
 - Enter credentials for the Office 365 Global admin
@@ -16,7 +19,7 @@
 
 - Done. Now you can connect to SharePoint via Powershell PnP
 
-### Connect to SharePoint with PnP PowerShell
+## Now let's connect to SharePoint with PnP PowerShell
 ```
 Connect-PnPOnline `
     -Thumbprint '<Certificate thumbprint>' `
@@ -25,7 +28,7 @@ Connect-PnPOnline `
     -Url https://<TENAMT>.sharepoint.com
 
 ```
-### Connect to SharePoint with PnP PowerShell. Example
+## Connect to SharePoint with PnP PowerShell. Example
 
 ```
 Connect-PnPOnline `
@@ -38,5 +41,5 @@ Get-PnPSite
 # See the list of site collections
 ```
 
-### Demo
+## Demo
 ![](images/DemoPowerShell.gif)
