@@ -37,3 +37,6 @@ Connect-PnPOnline `
 Get-PnPSite
 # See the list of site collections
 ```
+
+### Demo
+![](images/DemoPowerShell.gif)
