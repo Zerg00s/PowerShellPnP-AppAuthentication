@@ -97,7 +97,7 @@ try {
     # -------------------------------------------------------------------------------
     az ad app permission admin-consent --id $app.appId
 
-    Write-Host "[Success] $appName was granted permissions to access SharePoint Online Site collections for read-only" -ForegroundColor Green
+    Write-Host "[Success] $appName was granted full control permissions for the SharePoint Online Site collections and Managed Metadata service" -ForegroundColor Green
 
     # -------------------------------------------------------------------------------
     # Upload a .cer file to the AAD application
