@@ -17,7 +17,7 @@ The script will automatically:
 
 ## Prerequisites
 - [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest)
-- `Install-Module -Name SharePointPnPPowerShellOnline -RequiredVersion 3.11.1907.0 -Force`
+- `Install-Module -Name SharePointPnPPowerShellOnline -Force`
 - The script needs to be run by the Global Office 365/Azure Administrator
 
 ## Let's Register an AD App
