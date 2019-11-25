@@ -39,7 +39,7 @@ try {
     # -------------------------------------------------------------------------------
     Add-Type -AssemblyName System.Web 
     # "&" is converted to "\u0026" when using ConvertTo-Json, so we strip this off.
-    $certificatePassword = [System.Web.Security.Membership]::GeneratePassword(12, 3) -replace "&","!"
+    $certificatePassword = [System.Web.Security.Membership]::GeneratePassword(12, 3) -replace '&','!' -replace '&','!'
     $encryptedCertPassword = ConvertTo-SecureString -String $certificatePassword -AsPlainText -Force
 
     # -------------------------------------------------------------------------------
