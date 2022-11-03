@@ -23,7 +23,7 @@ The script will automatically:
 
 ## Let's Register an AD App
 
-- Right-click on the `Register_AAD_app.bat`
+- Right-click on the `Register_AAD_app.bat` and run as administrator
 
 - Enter credentials for the Office 365 Global admin
 
