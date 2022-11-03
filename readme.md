@@ -15,7 +15,6 @@ The script will automatically:
 - Save the results in the same folder
 
 
-
 ## Modify the requiredResourceManifest.json
 Optionally, you can modify the requiredResourceManifest.json script to change the permissions that the Azure App registration will have. Alternatively, you can just create it as-is and then request permissions via the Azure portal. Remember, this is an easy part. Creating a certificate is the difficualt part that is being automated here.
 
@@ -30,7 +29,7 @@ By default, the requiredResourceManifest.json defines:
 - [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest)
 - `Install-Module -Name SharePointPnPPowerShellOnline -Force`
 - `Install-Module -Name "PnP.PowerShell" -Scope CurrentUser`
-- The script needs to be run by the Global Office 365/Azure Administrator
+- The script needs to be run by the Global Microsoft 365/Azure Administrator
 
 ## Let's Register an AD App
 
@@ -38,7 +37,7 @@ By default, the requiredResourceManifest.json defines:
 
 - Right-click on the `Register_AAD_app.bat` and run as administrator
 
-- Enter credentials for the Office 365 Global admin
+- Enter credentials for the Microsoft 365 Global admin
 
 ![](images/AppRegistration.gif)
 
