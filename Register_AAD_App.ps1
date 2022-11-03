@@ -1,6 +1,6 @@
 ﻿# -------------------------------------------------------------------------------
 # This script is meant to deploy self-signed certificate to Azure AD
-# When running it, you will be asked to login to Office 365 then to Azure.
+# When running it, you will be asked to login to Microsoft 365 then to Azure.
 # This script generates X509 certificates and automatically applies them.
 # Refer to comments below to see the entire list of things that the script is doing.
 #
@@ -49,18 +49,19 @@ try {
     Write-Host "[Success] Generated a self-signed certificate: $certificateName" -ForegroundColor Green
 
     # -------------------------------------------------------------------------------
-    # Logging to Azure Cli using Office 365 Global Tenant Admin
+    # Logging to Azure Cli using Microsoft 365 Global Tenant Admin
     # -------------------------------------------------------------------------------
-    Write-Host "[Pending user action] Enter Global Office 365 Admin credentials..." -ForegroundColor Yellow
+    Write-Host "[Pending user action] Enter Global Microsoft 365 Admin credentials..." -ForegroundColor Yellow
     az login --allow-no-subscriptions
 
-    Write-Host "[Success] Connected Office 365's Azure tenant" -ForegroundColor Green
+    Write-Host "[Success] Connected Microsoft 365's Azure tenant" -ForegroundColor Green
 
     # -------------------------------------------------------------------------------
-    # Select Azure Subscription Associated with Office 365 tenant
+    # Select Azure Subscription Associated with Microsoft 365 tenant
     # -------------------------------------------------------------------------------
-    $subscription = az account show | ConvertFrom-Json
+    # $subscription = az account show | ConvertFrom-Json
     $account = az account show | ConvertFrom-Json
+    $verifiedDomain = $account.user.name.Split("@")[1]
 
     # -------------------------------------------------------------------------------
     # Delete the app if it already exists
@@ -73,7 +74,7 @@ try {
     }
 
     # -------------------------------------------------------------------------------
-    # Find existing application by name
+    # Find existing application by name. It should return $null
     # -------------------------------------------------------------------------------
     $apps = az ad app list | ConvertFrom-Json
     $app = $apps | Where-Object { $_.displayName -eq $appName }
@@ -82,10 +83,11 @@ try {
     # Assign Permissions the app. Permissions are described in the json file.
     # We are only asking for one permission: SharePoint Online: Read all site collections
     # -------------------------------------------------------------------------------
+    $AppUri = "https://$appName.$verifiedDomain"
     if ($null -eq $app) {
         $app = az ad app create `
             --display-name $appName `
-            --identifier-uris https://$appName.websites.net `
+            --identifier-uris $AppUri `
             --required-resource-accesses "requiredResourceManifest.json" `
         | ConvertFrom-Json
 
@@ -127,17 +129,17 @@ try {
         appName             = $appName
     }
     # -------------------------------------------------------------------------------
-    # Save information about the O365 Application in a file
+    # Save information about the M365 Application in a file
     # -------------------------------------------------------------------------------
     $AppDetails | ConvertTo-Json | Out-File "AppDetails.json"
 
     Write-Host "[Success] Saved AppDetails.json file about the '$appName' application on disk" -ForegroundColor Green
 
     # -------------------------------------------------------------------------------    
-    # We no longer need to work with Azure associated with Office 365
+    # We no longer need to work with Azure associated with Microsoft 365
     # -------------------------------------------------------------------------------
     az logout
-    Write-Host "[Success] Logged out from Office 365's Azure tenant" -ForegroundColor Green
+    Write-Host "[Success] Logged out from Microsoft 365's Azure tenant" -ForegroundColor Green
     
 }
 catch {
