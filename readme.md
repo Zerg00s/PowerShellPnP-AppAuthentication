@@ -34,6 +34,8 @@ By default, the requiredResourceManifest.json defines:
 
 ## Let's Register an AD App
 
+- Optionally, if you want your Azure App Registration to have a custom name, modify the `appName` variable in the script
+
 - Right-click on the `Register_AAD_app.bat` and run as administrator
 
 - Enter credentials for the Office 365 Global admin
@@ -50,6 +52,10 @@ By default, the requiredResourceManifest.json defines:
 - Done. Now you can connect to SharePoint via Powershell PnP
 
 ## To test it, Let's connect to SharePoint with PnP PowerShell
+
+- Install the certificate to your local store
+- Run this script
+
 ```
 Connect-PnPOnline `
     -Thumbprint '<Certificate thumbprint>' `
@@ -58,6 +64,18 @@ Connect-PnPOnline `
     -Url https://<TENAMT>.sharepoint.com
 
 ```
+
+OR Simply run to avoid installing the certificate:
+```
+Connect-PnPOnline `
+    -CertificatePath '.\DeploymentApp.pfx' `
+    -Tenant <TENANT>.onmicrosoft.com `
+    -ClientId <CLIENT/ADPP ID> `
+    -Url https://<TENAMT>.sharepoint.com
+
+```
+
+
 ## Connect to SharePoint with PnP PowerShell. Example
 
 ```
