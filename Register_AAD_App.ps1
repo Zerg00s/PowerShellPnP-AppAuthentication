@@ -37,9 +37,15 @@ try {
     # -------------------------------------------------------------------------------
     # Generate strong passwords for the certificate
     # -------------------------------------------------------------------------------
-    Add-Type -AssemblyName System.Web 
-    # "&" is converted to "\u0026" when using ConvertTo-Json, so we strip this off.
-    $certificatePassword = [System.Web.Security.Membership]::GeneratePassword(12, 3) -replace '&','!' -replace '&','!'
+  
+    $rand = new-object System.Random
+    $conjunction = "the","my","we","our","and","but","+"
+    $words = import-csv dict.csv
+    $word1 = ($words[$rand.Next(0,$words.Count)]).Word
+    $con = ($conjunction[$rand.Next(0,$conjunction.Count)])
+    $word2 = ($words[$rand.Next(0,$words.Count)]).Word
+    $certificatePassword =  $word1 + " " + $con + " " + $word2
+    
     $encryptedCertPassword = ConvertTo-SecureString -String $certificatePassword -AsPlainText -Force
 
     # -------------------------------------------------------------------------------
