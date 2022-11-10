@@ -101,9 +101,35 @@ try {
     }
 
     # -------------------------------------------------------------------------------
-    # Grant permissions (Admin-consent) programmatically. This commandlet became first available April 04 2019
+    # App takes time to be fully provisioned. We will keep trying to probide admin concent until in succeeds
     # -------------------------------------------------------------------------------
-    az ad app permission admin-consent --id $app.appId
+    $Stoploop = $false
+    [int]$Retrycount = "0"
+    do {
+        try {
+            # -------------------------------------------------------------------------------
+            # Grant permissions (Admin-consent) programmatically. This commandlet became first available April 04 2019
+            # -------------------------------------------------------------------------------
+            if(az ad app permission admin-consent --id $app.appId --only-show-errors){
+                Write-host "Success"
+            }else{
+                throw "App is not ready yet."
+            }
+            $Stoploop = $true
+        }
+        catch {
+            if ($Retrycount -gt 6){
+                Write-Host "Please, wait..."
+                $Stoploop = $true
+            }
+            else {
+                Write-Host "Please, wait..."
+                Start-Sleep -Seconds 5
+                $Retrycount = $Retrycount + 1
+            }
+        }
+    }
+    While ($Stoploop -eq $false)
 
     Write-Host "[Success] $appName was granted full control permissions for the SharePoint Online Site collections and Managed Metadata service" -ForegroundColor Green
 
